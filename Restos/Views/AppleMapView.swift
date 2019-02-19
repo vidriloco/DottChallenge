@@ -8,12 +8,17 @@
 
 import MapKit
 
+// MARK - Generic map view protocols
+
 protocol GenericMap {
     func configure(with viewController: UIViewController)
     func centerMapOn(location coordinateLocation: Coordinate, animated: Bool)
     func addPlacesToMap(_ places: [Place])
     func clearExistingMarkers()
 }
+
+// MARK - Apple map view wrapper around MKMapView
+
 
 class AppleMapView: MKMapView, GenericMap {
     

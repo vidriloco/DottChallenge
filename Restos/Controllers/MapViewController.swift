@@ -76,6 +76,8 @@ class MapViewController: UIViewController {
 
 }
 
+// MARK - CLLocationManagerDelegate methods
+
 extension MapViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -91,6 +93,8 @@ extension MapViewController : CLLocationManagerDelegate {
         print("Error \(error)")
     }
 }
+
+// MARK - MKMapViewDelegate methods
 
 extension MapViewController : MKMapViewDelegate {
     

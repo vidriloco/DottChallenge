@@ -8,6 +8,8 @@
 
 import CoreLocation
 
+// MARK - Places provider protocols
+
 protocol PlaceCategory {
     var id : String { get }
 }
@@ -16,9 +18,13 @@ protocol PlacesProvider {
     func getPlaces(around coordinate: Coordinate, limit: Int?, radius: Int?, categories: [PlaceCategory], completion: @escaping (Result<[Place]>) -> Void)
 }
 
+// MARK - Places provider enums
+
 enum GenericError: Error {
     case malformedURL
 }
+
+// MARK - Basic coordinate wrapper object around CLLocation
 
 struct CLLocationCoordinate: Coordinate {
     

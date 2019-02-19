@@ -26,6 +26,8 @@
 		3641E0E9221C9B1F0093E8FF /* Chainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0E8221C9B1F0093E8FF /* Chainable.swift */; };
 		3641E0EC221CA1A40093E8FF /* PlaceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0EB221CA1A40093E8FF /* PlaceDetailsViewController.swift */; };
 		3641E0EE221CA5190093E8FF /* PlaceDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0ED221CA5190093E8FF /* PlaceDetailsView.swift */; };
+		3641E0F0221CBB670093E8FF /* CredentialsReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0EF221CBB670093E8FF /* CredentialsReader.swift */; };
+		3641E0F2221CC0590093E8FF /* APICredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3641E0F1221CC0590093E8FF /* APICredentials.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		3641E0E8221C9B1F0093E8FF /* Chainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chainable.swift; sourceTree = "<group>"; };
 		3641E0EB221CA1A40093E8FF /* PlaceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsViewController.swift; sourceTree = "<group>"; };
 		3641E0ED221CA5190093E8FF /* PlaceDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsView.swift; sourceTree = "<group>"; };
+		3641E0EF221CBB670093E8FF /* CredentialsReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsReader.swift; sourceTree = "<group>"; };
+		3641E0F1221CC0590093E8FF /* APICredentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APICredentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 		3641E098221B57560093E8FF /* Restos */ = {
 			isa = PBXGroup;
 			children = (
+				3641E0F3221CC62A0093E8FF /* Extensions */,
 				3641E0EA221C9B340093E8FF /* Helpers */,
 				3641E0D2221B6BAD0093E8FF /* BusinessLogic */,
 				3641E0C9221B57960093E8FF /* Views */,
@@ -133,6 +138,7 @@
 				3641E0A0221B57590093E8FF /* Assets.xcassets */,
 				3641E0A2221B57590093E8FF /* LaunchScreen.storyboard */,
 				3641E0A5221B575A0093E8FF /* Info.plist */,
+				3641E0F1221CC0590093E8FF /* APICredentials.plist */,
 			);
 			path = Restos;
 			sourceTree = "<group>";
@@ -167,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				3641E09B221B57560093E8FF /* MapViewController.swift */,
-				3641E0CC221B592D0093E8FF /* UIViewController+Extensions.swift */,
 				3641E0EB221CA1A40093E8FF /* PlaceDetailsViewController.swift */,
 			);
 			path = Controllers;
@@ -176,7 +181,6 @@
 		3641E0C9221B57960093E8FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3641E0CA221B58D60093E8FF /* UIView+Extensions.swift */,
 				3641E0DC221B7A7C0093E8FF /* MapMarker.swift */,
 				3641E0E6221C981D0093E8FF /* AppleMapView.swift */,
 				3641E0ED221CA5190093E8FF /* PlaceDetailsView.swift */,
@@ -205,9 +209,19 @@
 		3641E0EA221C9B340093E8FF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3641E0E8221C9B1F0093E8FF /* Chainable.swift */,
+				3641E0EF221CBB670093E8FF /* CredentialsReader.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3641E0F3221CC62A0093E8FF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3641E0E8221C9B1F0093E8FF /* Chainable.swift */,
+				3641E0CC221B592D0093E8FF /* UIViewController+Extensions.swift */,
+				3641E0CA221B58D60093E8FF /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +335,7 @@
 			files = (
 				3641E0A4221B57590093E8FF /* LaunchScreen.storyboard in Resources */,
 				3641E0A1221B57590093E8FF /* Assets.xcassets in Resources */,
+				3641E0F2221CC0590093E8FF /* APICredentials.plist in Resources */,
 				3641E09F221B57560093E8FF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +366,7 @@
 				3641E0CB221B58D60093E8FF /* UIView+Extensions.swift in Sources */,
 				3641E09C221B57560093E8FF /* MapViewController.swift in Sources */,
 				3641E09A221B57560093E8FF /* AppDelegate.swift in Sources */,
+				3641E0F0221CBB670093E8FF /* CredentialsReader.swift in Sources */,
 				3641E0D6221B6D890093E8FF /* Place.swift in Sources */,
 				3641E0EE221CA5190093E8FF /* PlaceDetailsView.swift in Sources */,
 				3641E0E7221C981E0093E8FF /* AppleMapView.swift in Sources */,

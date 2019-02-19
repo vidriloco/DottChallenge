@@ -8,14 +8,18 @@
 
 import Foundation
 
+// MARK - Credentials Reader protocols
+
+protocol ThirdPartyAPIName {
+    var name : String { get }
+}
+
 protocol APICredentialsProvider {
     func clientID(for service: ThirdPartyAPIName) throws -> String
     func secretKey(for service: ThirdPartyAPIName) throws -> String
 }
 
-protocol ThirdPartyAPIName {
-    var name : String { get }
-}
+// MARK - Credentials Reader enums
 
 enum ThirdPartyAPIProviders : String, ThirdPartyAPIName {
     case foursquare
@@ -28,6 +32,8 @@ enum ThirdPartyAPIProviders : String, ThirdPartyAPIName {
 enum APICredentialReadErrors : Error {
     case couldNotReadAPICredentials
 }
+
+// MARK - Credentials Reader
 
 class CredentialsReader : APICredentialsProvider {
 
