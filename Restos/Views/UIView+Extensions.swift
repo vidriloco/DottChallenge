@@ -15,11 +15,6 @@ extension UIView {
         return self
     }
     
-    func with(_ blockForView: @escaping (UIView) -> Void) -> Self {
-        blockForView(self)
-        return self
-    }
-    
     func added(to viewController: UIViewController) -> Self {
         viewController.view.addSubview(self)
         return self

@@ -12,12 +12,22 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
-    var mapView: MKMapView!
-    var locationManager = CLLocationManager()
-    // Pass a generic and reduce dependency inversion here
-    let foursquareProvider = FoursquareProvider()
-    var markers = [MKAnnotation]()
+    let placesProvider : PlacesProvider
+    let mapView: GenericMap
+    
+    var locationManager : CLLocationManager?
 
+    init(placesProvider: PlacesProvider, mapView: GenericMap) {
+        self.placesProvider = placesProvider
+        self.mapView = mapView
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,59 +37,37 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        configureMap()
+        mapView.configure(with: self)
         determineCurrentLocation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        locationManager.stopUpdatingLocation()
-    }
-    
-    private func configureMap() {
-        self.mapView = MKMapView().added(to: self)
-            .withoutAutoConstraints()
-            .with({ mapView in
-                self.leadingAnchor.constraint(equalTo: mapView.leadingAnchor).isActive = true
-                mapView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-                self.topAnchor.constraint(equalTo: mapView.topAnchor).isActive = true
-                mapView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        })
-    
-        // TODO: Move into the block
-        mapView.mapType = .standard
-        mapView.isZoomEnabled = true
-        mapView.isPitchEnabled = true
-        mapView.showsUserLocation = true
-        mapView.delegate = self
-        
+        locationManager?.stopUpdatingLocation()
     }
     
     func determineCurrentLocation() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.requestWhenInUseAuthorization()
+        locationManager = CLLocationManager().with { manager in
+            manager.delegate = self
+            manager.desiredAccuracy = kCLLocationAccuracyKilometer
+            manager.distanceFilter = kCLDistanceFilterNone
+            manager.requestWhenInUseAuthorization()
+        }
         
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
+            locationManager?.startUpdatingLocation()
         }
     }
     
     func fetchRestaurants(around coordinate: Coordinate) {
         let restaurantTypes = [FoursquareProvider.Response.Venue.Category.restaurant]
         
-        foursquareProvider.getPlaces(around: coordinate, limit: 40, categories: restaurantTypes) { (results) in
+        placesProvider.getPlaces(around: coordinate, limit: 40, radius: 100, categories: restaurantTypes) { (results) in
             switch results {
             case .success(let places):
-                self.mapView.removeAnnotations(self.markers)
-                self.markers = places.map({
-                    return MapMarker(title: $0.label, coordinate: CLLocationCoordinate2DMake($0.latitude, $0.longitude))
-                })
-                self.markers.forEach { self.mapView.addAnnotation($0) }
-                print(self.markers.count)
-                
+                self.mapView.clearExistingMarkers()
+                self.mapView.addPlacesToMap(places)
             default:
                 print("Error")
             }
@@ -92,12 +80,9 @@ extension MapViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation: CLLocation = locations[0] as CLLocation
-        let mapCenter = userLocation.coordinate
-        
-        let mapCamera = MKMapCamera(lookingAtCenter: mapCenter, fromEyeCoordinate: mapCenter, eyeAltitude: 6000)
-        mapView.setCamera(mapCamera, animated: false)
-        
         let coordinate = CLLocationCoordinate(location: userLocation)
+        
+        mapView.centerMapOn(location: coordinate, animated: false)
         self.fetchRestaurants(around: coordinate)
     }
     
@@ -130,5 +115,10 @@ extension MapViewController : MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         fetchRestaurants(around: CLLocationCoordinate(location: CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)))
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        print(view.annotation?.title)
     }
 }
