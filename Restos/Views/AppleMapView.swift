@@ -44,9 +44,7 @@ class AppleMapView: MKMapView, GenericMap {
     }
     
     func addPlacesToMap(_ places: [Place]) {
-        existingMarkers = places.map({
-            return MapMarker(title: $0.label, coordinate: CLLocationCoordinate2DMake($0.latitude, $0.longitude))
-        })
+        existingMarkers = places.map { MapMarker($0) }
         existingMarkers.forEach { self.addAnnotation($0) }
     }
     

@@ -24,6 +24,8 @@
 		3641E0DD221B7A7C0093E8FF /* MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0DC221B7A7C0093E8FF /* MapMarker.swift */; };
 		3641E0E7221C981E0093E8FF /* AppleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0E6221C981D0093E8FF /* AppleMapView.swift */; };
 		3641E0E9221C9B1F0093E8FF /* Chainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0E8221C9B1F0093E8FF /* Chainable.swift */; };
+		3641E0EC221CA1A40093E8FF /* PlaceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0EB221CA1A40093E8FF /* PlaceDetailsViewController.swift */; };
+		3641E0EE221CA5190093E8FF /* PlaceDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0ED221CA5190093E8FF /* PlaceDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		3641E0DC221B7A7C0093E8FF /* MapMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarker.swift; sourceTree = "<group>"; };
 		3641E0E6221C981D0093E8FF /* AppleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMapView.swift; sourceTree = "<group>"; };
 		3641E0E8221C9B1F0093E8FF /* Chainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chainable.swift; sourceTree = "<group>"; };
+		3641E0EB221CA1A40093E8FF /* PlaceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsViewController.swift; sourceTree = "<group>"; };
+		3641E0ED221CA5190093E8FF /* PlaceDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +168,7 @@
 			children = (
 				3641E09B221B57560093E8FF /* MapViewController.swift */,
 				3641E0CC221B592D0093E8FF /* UIViewController+Extensions.swift */,
+				3641E0EB221CA1A40093E8FF /* PlaceDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 				3641E0CA221B58D60093E8FF /* UIView+Extensions.swift */,
 				3641E0DC221B7A7C0093E8FF /* MapMarker.swift */,
 				3641E0E6221C981D0093E8FF /* AppleMapView.swift */,
+				3641E0ED221CA5190093E8FF /* PlaceDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -346,7 +352,9 @@
 				3641E09C221B57560093E8FF /* MapViewController.swift in Sources */,
 				3641E09A221B57560093E8FF /* AppDelegate.swift in Sources */,
 				3641E0D6221B6D890093E8FF /* Place.swift in Sources */,
+				3641E0EE221CA5190093E8FF /* PlaceDetailsView.swift in Sources */,
 				3641E0E7221C981E0093E8FF /* AppleMapView.swift in Sources */,
+				3641E0EC221CA1A40093E8FF /* PlaceDetailsViewController.swift in Sources */,
 				3641E0DD221B7A7C0093E8FF /* MapMarker.swift in Sources */,
 				3641E0D4221B6BBE0093E8FF /* API.swift in Sources */,
 				3641E0D8221B6DA20093E8FF /* FoursquareProvider.swift in Sources */,

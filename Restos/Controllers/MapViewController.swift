@@ -118,7 +118,9 @@ extension MapViewController : MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        print(view.annotation?.title)
+        if let mapMarker = view.annotation as? MapMarker {
+            let place = mapMarker.place
+            self.navigationController?.pushViewController(PlaceDetailsViewController(place: place), animated: true)
+        }
     }
 }

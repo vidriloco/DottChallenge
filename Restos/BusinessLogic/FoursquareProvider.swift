@@ -70,7 +70,7 @@ class FoursquareProvider {
             }
             
             var formattedAddress: String {
-                return location.formattedAddress.joined()
+                return location.formattedAddress.joined(separator: ", ")
             }
             
         }

@@ -11,10 +11,12 @@ import MapKit
 class MapMarker: NSObject, MKAnnotation {
     let title: String?
     let coordinate: CLLocationCoordinate2D
+    let place: Place
     
-    init(title: String, coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.coordinate = coordinate
+    init(_ place: Place) {
+        self.place = place
+        self.title = place.label
+        self.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
         
         super.init()
     }
