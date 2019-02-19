@@ -78,14 +78,15 @@ class FoursquareProvider {
     
     private let endpoint: String
     
-    // TODO: Move into a plist file
-    let credentialID = "HRBX4VDP52OQE4ZPPHJ1N1NRXFEUMHGXIYQSNRYLJPO3W35L"
-    let clientSecret = "014E3TND0KS151GCUV5VIFS2OVL044HUKPSGCK42YFDHUNHH"
+    let credentialID : String
+    let clientSecret : String
     
     private var dataTask: URLSessionDataTask?
     
-    init(endpoint: String? = "https://api.foursquare.com/v2") {
+    init(endpoint: String? = "https://api.foursquare.com/v2", credentials: APICredentialsProvider) {
         self.endpoint = endpoint!
+        self.credentialID = try! credentials.clientID(for: ThirdPartyAPIProviders.foursquare)
+        self.clientSecret = try! credentials.secretKey(for: ThirdPartyAPIProviders.foursquare)
     }
 }
 
