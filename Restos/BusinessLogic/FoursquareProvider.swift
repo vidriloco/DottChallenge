@@ -11,6 +11,14 @@ import Foundation
 class FoursquareProvider {
     typealias FoursquarePlace = Response.Venue
     
+    enum VenueTypes: String, PlaceCategory {
+        case restaurant = "4d4b7105d754a06374d81259"
+        
+        var id : String {
+            return self.rawValue
+        }
+    }
+    
     struct Response: Decodable {
         let response: PlacesList
         
@@ -19,14 +27,6 @@ class FoursquareProvider {
         }
         
         struct Venue: Decodable, Place {
-            
-            enum Category: String, PlaceCategory {
-                case restaurant = "4d4b7105d754a06374d81259"
-                
-                var id : String {
-                    return self.rawValue
-                }
-            }
             
             struct Location: Decodable {
                 let lat: Double
@@ -78,6 +78,7 @@ class FoursquareProvider {
     
     private let endpoint: String
     
+    // TODO: Move into a plist file
     let credentialID = "HRBX4VDP52OQE4ZPPHJ1N1NRXFEUMHGXIYQSNRYLJPO3W35L"
     let clientSecret = "014E3TND0KS151GCUV5VIFS2OVL044HUKPSGCK42YFDHUNHH"
     
@@ -107,6 +108,7 @@ extension FoursquareProvider: PlacesProvider {
     }
     
     func getPlaces(around coordinate: Coordinate, limit: Int? = 10, radius: Int? = 1000, categories: [PlaceCategory], completion: @escaping (Result<[Place]>) -> Void) {
+        
         dataTask?.cancel()
         
         let getPlacesURL = urlForGettingPlaces(coordinate: coordinate,

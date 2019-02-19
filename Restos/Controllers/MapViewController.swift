@@ -61,7 +61,7 @@ class MapViewController: UIViewController {
     }
     
     func fetchRestaurants(around coordinate: Coordinate) {
-        let restaurantTypes = [FoursquareProvider.Response.Venue.Category.restaurant]
+        let restaurantTypes = [FoursquareProvider.VenueTypes.restaurant]
         
         placesProvider.getPlaces(around: coordinate, limit: 40, radius: 100, categories: restaurantTypes) { (results) in
             switch results {
