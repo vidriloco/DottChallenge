@@ -17,6 +17,11 @@
 		3641E0CB221B58D60093E8FF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0CA221B58D60093E8FF /* UIView+Extensions.swift */; };
 		3641E0CD221B592D0093E8FF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0CC221B592D0093E8FF /* UIViewController+Extensions.swift */; };
 		3641E0D0221B61320093E8FF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3641E0CF221B61320093E8FF /* MapKit.framework */; };
+		3641E0D4221B6BBE0093E8FF /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0D3221B6BBE0093E8FF /* API.swift */; };
+		3641E0D6221B6D890093E8FF /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0D5221B6D890093E8FF /* POI.swift */; };
+		3641E0D8221B6DA20093E8FF /* FoursquareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0D7221B6DA20093E8FF /* FoursquareProvider.swift */; };
+		3641E0DB221B6E2F0093E8FF /* PlacesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0DA221B6E2F0093E8FF /* PlacesProvider.swift */; };
+		3641E0DD221B7A7C0093E8FF /* MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3641E0DC221B7A7C0093E8FF /* MapMarker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,11 @@
 		3641E0CA221B58D60093E8FF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		3641E0CC221B592D0093E8FF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		3641E0CF221B61320093E8FF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3641E0D3221B6BBE0093E8FF /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		3641E0D5221B6D890093E8FF /* POI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
+		3641E0D7221B6DA20093E8FF /* FoursquareProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoursquareProvider.swift; sourceTree = "<group>"; };
+		3641E0DA221B6E2F0093E8FF /* PlacesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesProvider.swift; sourceTree = "<group>"; };
+		3641E0DC221B7A7C0093E8FF /* MapMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +115,7 @@
 		3641E098221B57560093E8FF /* Restos */ = {
 			isa = PBXGroup;
 			children = (
+				3641E0D2221B6BAD0093E8FF /* BusinessLogic */,
 				3641E0C9221B57960093E8FF /* Views */,
 				3641E0C8221B578E0093E8FF /* Controllers */,
 				3641E0C7221B57780093E8FF /* Models */,
@@ -138,6 +149,7 @@
 		3641E0C7221B57780093E8FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3641E0D5221B6D890093E8FF /* POI.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -155,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				3641E0CA221B58D60093E8FF /* UIView+Extensions.swift */,
+				3641E0DC221B7A7C0093E8FF /* MapMarker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -165,6 +178,16 @@
 				3641E0CF221B61320093E8FF /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3641E0D2221B6BAD0093E8FF /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+				3641E0DA221B6E2F0093E8FF /* PlacesProvider.swift */,
+				3641E0D3221B6BBE0093E8FF /* API.swift */,
+				3641E0D7221B6DA20093E8FF /* FoursquareProvider.swift */,
+			);
+			path = BusinessLogic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +330,11 @@
 				3641E0CB221B58D60093E8FF /* UIView+Extensions.swift in Sources */,
 				3641E09C221B57560093E8FF /* MapViewController.swift in Sources */,
 				3641E09A221B57560093E8FF /* AppDelegate.swift in Sources */,
+				3641E0D6221B6D890093E8FF /* POI.swift in Sources */,
+				3641E0DD221B7A7C0093E8FF /* MapMarker.swift in Sources */,
+				3641E0D4221B6BBE0093E8FF /* API.swift in Sources */,
+				3641E0D8221B6DA20093E8FF /* FoursquareProvider.swift in Sources */,
+				3641E0DB221B6E2F0093E8FF /* PlacesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
