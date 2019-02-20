@@ -9,15 +9,20 @@
 import MapKit
 
 class MapMarker: NSObject, MKAnnotation {
+    let id: String
     let title: String?
+    let distance: String?
     let coordinate: CLLocationCoordinate2D
-    let place: Place
     
     init(_ place: Place) {
-        self.place = place
         self.title = place.label
         self.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
-        
+        self.distance = "\( place.distance) m"
+        self.id = place.identifier
         super.init()
+    }
+    
+    var subtitle: String? {
+        return distance
     }
 }

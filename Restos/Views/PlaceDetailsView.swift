@@ -65,13 +65,14 @@ class PlaceDetailsView : UIView {
         
         // Activate labels constraints
         NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.8),
             titleLabel.topAnchor.constraint(equalTo: placeImageView.bottomAnchor, constant: 30),
             checkinsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             addressLabel.topAnchor.constraint(equalTo: checkinsLabel.bottomAnchor, constant: 20),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             checkinsLabel.centerXAnchor.constraint(equalTo: titleLabel.centerXAnchor),
             addressLabel.centerXAnchor.constraint(equalTo: checkinsLabel.centerXAnchor),
-            addressLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.5)
+            addressLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.7)
         ])
     }
 }

@@ -14,6 +14,7 @@ protocol Coordinate {
 }
 
 protocol POI {
+    var identifier: String { get } 
     var label: String { get }
     var isVerified: Bool { get }
     var numberOfCheckins: Int { get }
@@ -53,6 +54,10 @@ extension FoursquareProvider {
             private let stats: Stats
             private let location: Location
             
+            var identifier: String {
+                return id
+            }
+
             var latitude: Double {
                 return location.lat
             }

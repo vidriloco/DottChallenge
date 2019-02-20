@@ -42,3 +42,14 @@ struct CLLocationCoordinate: Coordinate {
         return self.location.coordinate.longitude
     }
 }
+
+extension CLLocationCoordinate {
+    
+    init(_ coordinate: CLLocationCoordinate2D) {
+        self.init(location: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
+    }
+    
+    init(_ place: Place) {
+        self.init(CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude))
+    }
+}

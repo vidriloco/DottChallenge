@@ -12,14 +12,20 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
-    let placesProvider : PlacesProvider
-    let mapView: GenericMap
+    let placesProvider: PlacesProvider
+    var placesHash = [String : Place]()
+    
+    let genericMapView: GenericMap
+    
+    // Given in meters
+    let radiusRange = 500
+    let displayedResults = 20
     
     var locationManager : CLLocationManager?
 
     init(placesProvider: PlacesProvider, mapView: GenericMap) {
         self.placesProvider = placesProvider
-        self.mapView = mapView
+        self.genericMapView = mapView
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,13 +38,13 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Restaurants"
+        determineCurrentLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        mapView.configure(with: self)
-        determineCurrentLocation()
+        genericMapView.configure(with: self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,11 +69,17 @@ class MapViewController: UIViewController {
     func fetchRestaurants(around coordinate: Coordinate) {
         let restaurantTypes = [FoursquareProvider.VenueTypes.restaurant]
         
-        placesProvider.getPlaces(around: coordinate, limit: 40, radius: 100, categories: restaurantTypes) { (results) in
+        placesProvider.getPlaces(around: coordinate,
+                                 limit: displayedResults,
+                                 radius: radiusRange,
+                                 categories: restaurantTypes) { (results) in
             switch results {
             case .success(let places):
-                self.mapView.clearExistingMarkers()
-                self.mapView.addPlacesToMap(places)
+                self.placesHash.removeAll()
+                places.forEach { self.placesHash[$0.identifier] = $0 }
+                
+                self.genericMapView.clearExistingPlaces()
+                self.genericMapView.addPlacesToMap(places)
             default:
                 print("Error")
             }
@@ -84,8 +96,8 @@ extension MapViewController : CLLocationManagerDelegate {
         let userLocation: CLLocation = locations[0] as CLLocation
         let coordinate = CLLocationCoordinate(location: userLocation)
         
-        mapView.centerMapOn(location: coordinate, animated: false)
-        self.fetchRestaurants(around: coordinate)
+        genericMapView.centerCameraOn(location: coordinate, animated: false)
+        fetchRestaurants(around: coordinate)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
@@ -118,13 +130,13 @@ extension MapViewController : MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        fetchRestaurants(around: CLLocationCoordinate(location: CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)))
+        fetchRestaurants(around: CLLocationCoordinate(mapView.centerCoordinate))
     }
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let mapMarker = view.annotation as? MapMarker {
-            let place = mapMarker.place
-            self.navigationController?.pushViewController(PlaceDetailsViewController(place: place), animated: true)
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if let mapMarker = view.annotation as? MapMarker, let place = placesHash[mapMarker.id] {
+            navigationController?.pushViewController(PlaceDetailsViewController(place: place), animated: true)
         }
     }
 }

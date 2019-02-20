@@ -16,14 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let mapViewController = MapViewController(placesProvider: FoursquareProvider(), mapView: AppleMapView())
         let credentialsReader = CredentialsReader(plist: "APICredentials")
         let placesProvider = FoursquareProvider(credentials: credentialsReader)
         let mapViewController = MapViewController(placesProvider: placesProvider, mapView: AppleMapView())
         
-        let navigationController = UINavigationController(rootViewController: mapViewController)
         let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = navigationController
+        window.rootViewController = UINavigationController(rootViewController: mapViewController)
         window.makeKeyAndVisible()
         
         self.window = window

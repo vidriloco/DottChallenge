@@ -12,17 +12,18 @@ import MapKit
 
 protocol GenericMap {
     func configure(with viewController: UIViewController)
+    func centerCameraOn(location coordinateLocation: Coordinate, animated: Bool)
     func centerMapOn(location coordinateLocation: Coordinate, animated: Bool)
     func addPlacesToMap(_ places: [Place])
-    func clearExistingMarkers()
+    func clearExistingPlaces()
 }
 
 // MARK - Apple map view wrapper around MKMapView
 
-
 class AppleMapView: MKMapView, GenericMap {
     
-    var existingMarkers = [MapMarker]()
+    private var existingMarkers = Set<MapMarker>()
+    private var allowedAltitudeRange = CLLocationDistance(3000)...CLLocationDistance(10000)
     
     func configure(with viewController: UIViewController) {
         self.added(to: viewController)
@@ -41,19 +42,33 @@ class AppleMapView: MKMapView, GenericMap {
             })
     }
     
+    func centerCameraOn(location coordinateLocation: Coordinate, animated: Bool) {
+        let altitude = (allowedAltitudeRange ~= camera.altitude) ? camera.altitude : allowedAltitudeRange.lowerBound
+
+        let mapCenter = CLLocationCoordinate2DMake(coordinateLocation.latitude, coordinateLocation.longitude)
+        let mapCamera = MKMapCamera(lookingAtCenter: mapCenter, fromEyeCoordinate: mapCenter, eyeAltitude: altitude)
+        
+        setCamera(mapCamera, animated: animated)
+    }
+    
     func centerMapOn(location coordinateLocation: Coordinate, animated: Bool) {
         let mapCenter = CLLocationCoordinate2DMake(coordinateLocation.latitude, coordinateLocation.longitude)
-        
-        let mapCamera = MKMapCamera(lookingAtCenter: mapCenter, fromEyeCoordinate: mapCenter, eyeAltitude: 6000)
-        self.setCamera(mapCamera, animated: false)
+
+        setCenter(mapCenter, animated: animated)
     }
     
     func addPlacesToMap(_ places: [Place]) {
-        existingMarkers = places.map { MapMarker($0) }
-        existingMarkers.forEach { self.addAnnotation($0) }
+        existingMarkers = existingMarkers.union(places.map { MapMarker($0) })
+        existingMarkers.forEach { addAnnotation($0) }
     }
     
-    func clearExistingMarkers() {
-        removeAnnotations(existingMarkers)
+    func clearExistingPlaces() {
+        existingMarkers.forEach {
+            let coordinatePoint = convert($0.coordinate, toPointTo: self)
+            if !annotationVisibleRect.contains(coordinatePoint) {
+                existingMarkers.remove($0)
+                removeAnnotation($0)
+            }
+        }
     }
 }
